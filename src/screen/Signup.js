@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
-import {auth} from '../firebase';
-import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+// import {auth} from '../firebase';
+// import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -29,28 +29,28 @@ const Signup = () => {
           const name = nameRef.current.value;
           const profileURL = profileURLRef.current.value;
 
-          createUserWithEmailAndPassword(auth, email, password).then((userData)=>{
-            console.log("USERDATA", userData);
+          // createUserWithEmailAndPassword(auth, email, password).then((userData)=>{
+          //   console.log("USERDATA", userData);
             
-            if(userData){
+          //   if(userData){
 
-              //Update The Data: name, profile
-              updateProfile(auth.currentUser, { 
-                displayName: name, 
-                photoURL: profileURL
-              }).then(()=>{
-                alert("Account Created")
-                navigate('/signin')
-              }).catch((err)=>{
-                alert(err.message)
-                console.log(err.message)
-              })
+          //     //Update The Data: name, profile
+          //     updateProfile(auth.currentUser, { 
+          //       displayName: name, 
+          //       photoURL: profileURL
+          //     }).then(()=>{
+          //       alert("Account Created")
+          //       navigate('/signin')
+          //     }).catch((err)=>{
+          //       alert(err.message)
+          //       console.log(err.message)
+          //     })
 
-            }
-          }).catch((err)=>{
-            alert(err.message)
-            console.log(err.message)
-          })
+          //   }
+          // }).catch((err)=>{
+          //   alert(err.message)
+          //   console.log(err.message)
+          // })
 
         }}
       >Register</button>

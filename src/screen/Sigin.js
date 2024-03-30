@@ -1,7 +1,11 @@
 import React, {useRef} from 'react';
-import {auth} from '../firebase';
-import {signInWithEmailAndPassword} from 'firebase/auth'
+// import {auth} from '../firebase';
+// import {signInWithEmailAndPassword} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+
+import {updateEmail, updatePassword} from '../redux/actions/user.action'
 
 const Signin = () => {
 
@@ -11,6 +15,8 @@ const Signin = () => {
 
   const passwordRef = useRef(null);
 
+  const dispatch = useDispatch();
+
   return (
     <div style={{display: 'flex', gap: 10}}>
       <input ref={emailRef} placeholder='Enter Email' type='email'/>
@@ -19,20 +25,29 @@ const Signin = () => {
         onClick={()=>{
 
           const email = emailRef.current.value;
-          const password = emailRef.current.value;
 
-          signInWithEmailAndPassword(auth, email, password).then((userData)=>{
+          const password = passwordRef.current.value;
 
-            if(userData){
-              console.log(userData)
-              alert("SIGNIN Successfully")
-              navigate('/')
-            }
 
-          }).catch((err)=>{
-            alert(err.message)
-            console.log(err.message)
-          })
+          dispatch({type:"UPDATE_EMAIL", payload: email});
+
+          dispatch(updatePassword(password));
+
+          navigate('/');
+
+
+          // signInWithEmailAndPassword(auth, email, password).then((userData)=>{
+
+          //   if(userData){
+          //     console.log(userData)
+          //     alert("SIGNIN Successfully")
+          //     navigate('/')
+          //   }
+
+          // }).catch((err)=>{
+          //   alert(err.message)
+          //   console.log(err.message)
+          // })
 
         }}
       >Signin</button>
